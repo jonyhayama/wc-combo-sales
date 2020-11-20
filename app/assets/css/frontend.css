@@ -1,0 +1,53 @@
+.wc-combo-sales {
+  width: 65%;
+  float: left;
+}
+.wc-combo-sales + .cross-sells {
+  display: none;
+}
+.wc-combo-sales .wc-combo-sale{
+  display: flex;
+  align-items: center;
+}
+.wc-combo-sales .wc-combo-sale ul {
+  display: flex;
+  list-style: none;
+  margin: 0 -5px;
+  padding: 0;
+}
+
+.wc-combo-sales .wc-combo-sale li {
+  padding: 5px;
+  padding-right: 40px;
+  position: relative;
+  text-align: center;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.wc-combo-sales .wc-combo-sale li:after {
+  content: "+";
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 50%;
+  right: 2.5px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.wc-combo-sales .wc-combo-sale li:last-child:after{
+  content: "=";
+}
+
+.wc-combo-sales .wc-combo-sale li img {
+  /* width: 110px; */
+}
+
+.wc-combo-sales .wc-combo-sale-info {
+  padding-left: 10px;
+}
