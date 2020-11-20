@@ -4,7 +4,7 @@ namespace wcComboSales\model;
 class combo {
   public function __construct(){
     // add_action( 'init', [$this, 'register_taxonomy'], 0 );
-    // add_action( 'acf/init', array( $this, 'register_fields' ) );
+    add_action( 'acf/init', [ $this, 'register_fields' ] );
     add_action( 'init', [$this, 'register_post_type'], 0 );
   }
 
@@ -69,58 +69,16 @@ class combo {
 
   }
 
-  public function register_taxonomy() {
-
-    $labels = array(
-      'name'                       => _x( 'Product Stamps', 'Taxonomy General Name', 'wc-product-stamps' ),
-      'singular_name'              => _x( 'Product Stamp', 'Taxonomy Singular Name', 'wc-product-stamps' ),
-      'menu_name'                  => __( 'Product Stamps', 'wc-product-stamps' ),
-      'all_items'                  => __( 'All Stamps', 'wc-product-stamps' ),
-      'parent_item'                => __( 'Parent Stamp', 'wc-product-stamps' ),
-      'parent_item_colon'          => __( 'Parent Stamp:', 'wc-product-stamps' ),
-      'new_item_name'              => __( 'New Stamp Name', 'wc-product-stamps' ),
-      'add_new_item'               => __( 'Add New Stamp', 'wc-product-stamps' ),
-      'edit_item'                  => __( 'Edit Stamp', 'wc-product-stamps' ),
-      'update_item'                => __( 'Update Stamp', 'wc-product-stamps' ),
-      'view_item'                  => __( 'View Stamp', 'wc-product-stamps' ),
-      'separate_items_with_commas' => __( 'Separate items with commas', 'wc-product-stamps' ),
-      'add_or_remove_items'        => __( 'Add or remove items', 'wc-product-stamps' ),
-      'choose_from_most_used'      => __( 'Choose from the most used', 'wc-product-stamps' ),
-      'popular_items'              => __( 'Popular Stamps', 'wc-product-stamps' ),
-      'search_items'               => __( 'Search Stamps', 'wc-product-stamps' ),
-      'not_found'                  => __( 'Not Found', 'wc-product-stamps' ),
-      'no_terms'                   => __( 'No items', 'wc-product-stamps' ),
-      'items_list'                 => __( 'Stamps list', 'wc-product-stamps' ),
-      'items_list_navigation'      => __( 'Stamps list navigation', 'wc-product-stamps' ),
-    );
-    $rewrite = array(
-      'slug'                       => 'product-stamp',
-      'with_front'                 => true,
-      'hierarchical'               => false,
-    );
-    $args = array(
-      'labels'                     => $labels,
-      'hierarchical'               => false,
-      'public'                     => true,
-      'show_ui'                    => true,
-      'show_admin_column'          => true,
-      'show_in_nav_menus'          => true,
-      'show_tagcloud'              => true,
-      'rewrite'                    => $rewrite,
-    );
-    register_taxonomy( 'product_stamp', array( 'product' ), $args );
-  }
-
-  public function register_fields(){
+  public function register_fields() {
     acf_add_local_field_group(array(
-      'key' => 'group_5f846e71683cd',
-      'title' => 'Product Stamp',
+      'key' => 'group_5fb3b98c70cfe',
+      'title' => 'Combo',
       'fields' => array(
         array(
-          'key' => 'field_5f89843279e96',
-          'label' => 'Image',
-          'name' => 'image',
-          'type' => 'image',
+          'key' => 'field_5fb3b994722e9',
+          'label' => 'Products',
+          'name' => 'products',
+          'type' => 'relationship',
           'instructions' => '',
           'required' => 0,
           'conditional_logic' => 0,
@@ -129,21 +87,24 @@ class combo {
             'class' => '',
             'id' => '',
           ),
-          'return_format' => 'url',
-          'preview_size' => 'thumbnail',
-          'library' => 'all',
-          'min_width' => '',
-          'min_height' => '',
-          'min_size' => '',
-          'max_width' => '',
-          'max_height' => '',
-          'max_size' => '',
-          'mime_types' => '',
+          'post_type' => array(
+            0 => 'product',
+          ),
+          'taxonomy' => '',
+          'filters' => array(
+            0 => 'search',
+            1 => 'post_type',
+            2 => 'taxonomy',
+          ),
+          'elements' => '',
+          'min' => '',
+          'max' => '',
+          'return_format' => 'id',
         ),
         array(
-          'key' => 'field_5f846e8d89377',
-          'label' => 'Behavior',
-          'name' => 'behavior',
+          'key' => 'field_5fb3ba79157a0',
+          'label' => 'Discount Type',
+          'name' => 'discount_type',
           'type' => 'select',
           'instructions' => '',
           'required' => 0,
@@ -154,12 +115,11 @@ class combo {
             'id' => '',
           ),
           'choices' => array(
-            'visual-aid' => 'Visual Aid',
-            'add-free-shipping' => 'Add Free Shipping',
-            'last-units' => 'Last Units in Stock',
+            'percentage' => 'Percentage',
+            'fixed_value' => 'Fixed Value',
           ),
           'default_value' => array(
-            0 => 'visual-aid',
+            0 => 'percentage',
           ),
           'allow_null' => 0,
           'multiple' => 0,
@@ -169,39 +129,10 @@ class combo {
           'placeholder' => '',
         ),
         array(
-          'key' => 'field_5f8984620b2e4',
-          'label' => 'Last Units',
-          'name' => 'last_units',
+          'key' => 'field_5fb3baaa157a1',
+          'label' => 'Discount',
+          'name' => 'discount',
           'type' => 'number',
-          'instructions' => '',
-          'required' => 0,
-          'conditional_logic' => array(
-            array(
-              array(
-                'field' => 'field_5f846e8d89377',
-                'operator' => '==',
-                'value' => 'last-units',
-              ),
-            ),
-          ),
-          'wrapper' => array(
-            'width' => '',
-            'class' => '',
-            'id' => '',
-          ),
-          'default_value' => '',
-          'placeholder' => '',
-          'prepend' => '',
-          'append' => '',
-          'min' => 1,
-          'max' => '',
-          'step' => '',
-        ),
-        array(
-          'key' => 'field_5f899437a472b',
-          'label' => 'Custom CSS',
-          'name' => 'custom_css',
-          'type' => 'textarea',
           'instructions' => '',
           'required' => 0,
           'conditional_logic' => 0,
@@ -212,17 +143,19 @@ class combo {
           ),
           'default_value' => '',
           'placeholder' => '',
-          'maxlength' => '',
-          'rows' => '',
-          'new_lines' => '',
+          'prepend' => '',
+          'append' => '',
+          'min' => '',
+          'max' => '',
+          'step' => '',
         ),
       ),
       'location' => array(
         array(
           array(
-            'param' => 'taxonomy',
+            'param' => 'post_type',
             'operator' => '==',
-            'value' => 'product_stamp',
+            'value' => 'combo',
           ),
         ),
       ),

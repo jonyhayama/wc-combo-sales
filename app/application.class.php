@@ -71,6 +71,7 @@ class wcComboSales{
   }
   
   public function load_classes(){
+		$this->setting = new wcComboSales\model\setting;
 		$this->settings = new wcComboSales\controller\settings;
 		
     $this->combo = new wcComboSales\model\combo;
