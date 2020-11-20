@@ -104,12 +104,16 @@ class combos{
   }
 
   public function add_to_cart(){
+    self::populate_static_vars();
+
     if( get_post_type() != 'combo' ) {
       return;
     }
     $products = get_field('products');
     foreach( $products as $product_id ){
-      WC()->cart->add_to_cart( $product_id );
+      if( !in_array($product_id, array_keys(self::$products_in_cart) ) ){
+        WC()->cart->add_to_cart( $product_id );
+      }
     }
     wp_safe_redirect( wc_get_cart_url() );
     exit;
