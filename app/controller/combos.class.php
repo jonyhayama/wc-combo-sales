@@ -59,7 +59,16 @@ class combos{
   public function add_combo_offers_to_cart(){
     self::populate_static_vars();
     $max_combos_per_cart = wc_combo_sales('settings')->get_field('max_combos_per_cart') ?: 3;
-    $combos = array_slice(self::$incomplete_combos_in_cart, 0, $max_combos_per_cart);
+    $combos = array_filter(self::$incomplete_combos_in_cart, function($c){
+      foreach( get_field('products', $c) as $cp ){
+        $product = wc_get_product( $cp );
+        if( !$product->is_in_stock() ){
+          return false;
+        }
+      }
+      return true;
+    });
+    $combos = array_slice($combos, 0, $max_combos_per_cart);
     if( empty( $combos ) ){
       return;
     }
