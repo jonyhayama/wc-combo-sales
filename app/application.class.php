@@ -86,7 +86,7 @@ class wcComboSales{
   }
   
   public function enqueue_scripts(){
-		wp_enqueue_style( 'wc-combo-sales-style', WC_COMBO_SALES_ASSETS_URL . '/css/frontend.css', array(), '0.0.1', 'all' );
+		wp_enqueue_style( 'wc-combo-sales-style', WC_COMBO_SALES_ASSETS_URL . '/css/frontend.css', array(), '0.0.2', 'all' );
 
     // wp_enqueue_script( 'wc-combo-sales-script', WC_COMBO_SALES_ASSETS_URL . '/js/frontend.js', array('jquery'), '0.0.1', true );
     // wp_localize_script( 'wc-combo-sales-script', 'WC_COMBO_SALES', [ 'ajax_url' => admin_url( 'admin-ajax.php' ) ] );
