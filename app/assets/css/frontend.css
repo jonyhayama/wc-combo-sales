@@ -2,6 +2,11 @@
   width: 65%;
   float: left;
 }
+.woocommerce .cart-collaterals .wc-combo-sales + .cart_totals {
+  width: 33%;
+  float: right;
+}
+
 .wc-combo-sales + .cross-sells {
   display: none;
 }
