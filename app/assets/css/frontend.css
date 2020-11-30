@@ -2,6 +2,12 @@
   width: 65%;
   float: left;
 }
+
+.wc-combo-sales.wc-combo-sales-archive{
+  width: 100%;
+  float: none;
+}
+
 .woocommerce .cart-collaterals .wc-combo-sales + .cart_totals {
   width: 33%;
   float: right;

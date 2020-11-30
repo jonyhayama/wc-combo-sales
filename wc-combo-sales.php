@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Combo Sales
 Plugin URI: 
 Description: WooCommerce Combo Sales
-Version: 0.0.4
+Version: 0.0.5
 Author: Jony Hayama
 Author URI: https://jony.dev
 */
@@ -13,6 +13,7 @@ define( 'WC_COMBO_SALES_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WC_COMBO_SALES_PLUGIN_URL', plugins_url('', __FILE__ ) );
 define( 'WC_COMBO_SALES_ASSETS_URL', WC_COMBO_SALES_PLUGIN_URL . '/app/assets' );
 define( 'WC_COMBO_SALES_APP_PATH', WC_COMBO_SALES_DIR_PATH . 'app' . DIRECTORY_SEPARATOR );
+define( 'WC_COMBO_SALES_ASSETS_PATH', WC_COMBO_SALES_DIR_PATH . '/app/assets' );
 
 require_once( WC_COMBO_SALES_APP_PATH . 'application.class.php' );
 

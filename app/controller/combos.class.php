@@ -10,8 +10,10 @@ class combos{
 
   public function __construct(){
     add_action( 'template_redirect', [$this, 'add_to_cart'] );
+    add_action( 'template_include', [$this, 'template_include'] );
     add_action( 'woocommerce_cart_calculate_fees', [$this, 'add_cart_discount'] );
     add_action( 'woocommerce_cart_collaterals', [$this, 'add_combo_offers_to_cart'], 0 );
+    add_action( 'pre_get_posts', [$this, 'set_combos_per_page'], 999 );
   }
 
   public static function populate_static_vars(){
@@ -73,7 +75,7 @@ class combos{
       return;
     }
     
-    wc_combo_sales()->get_template_part( [ 'template' => 'combos/content', 'locals' => [ 'combos' => $combos ] ] );
+    wc_combo_sales()->get_template_part( [ 'template' => 'combos/cart-content', 'locals' => [ 'combos' => $combos ] ] );
   }
 
   public function calculate_combo_discount( $combo_total_price, $combo_id ){
@@ -118,6 +120,10 @@ class combos{
     if( get_post_type() != 'combo' ) {
       return;
     }
+    if( !is_singular() ){
+      return;
+    }
+
     $products = get_field('products');
     foreach( $products as $product_id ){
       if( !in_array($product_id, array_keys(self::$products_in_cart) ) ){
@@ -126,5 +132,24 @@ class combos{
     }
     wp_safe_redirect( wc_get_cart_url() );
     exit;
+  }
+
+  public function set_combos_per_page( $query ){
+    if ( ! is_admin() && $query->is_main_query() ) {
+      if( $query->is_archive('combo') && !get_search_query() ) {
+        $query->set( 'posts_per_page', -1 );
+      }
+    }
+  }
+
+  public function template_include( $template ){
+    if( get_post_type() != 'combo' ) {
+      return $template;
+    }
+    if( is_singular() ){
+      return $template;
+    }
+    
+    return wc_combo_sales()->locate_template( [ 'template' => 'combos/archive' ] );
   }
 }
