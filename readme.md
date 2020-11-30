@@ -4,7 +4,7 @@ Plugin URI: https://github.com/jonyhayama/wc-combo-sales
 
 Description: Sell "combo" products
 
-Version: 0.0.6
+Version: 0.0.7
 
 Author: Jony Hayama
 
