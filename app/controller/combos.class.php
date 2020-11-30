@@ -155,7 +155,7 @@ class combos{
       'posts_per_page' => -1,
     ]);
 
-    wc_combo_sales()->fetch_template_part( [ 'template' => 'combos/archive-shortcode', 'locals' => [ 'the_query' => $the_query ] ] );
+    return wc_combo_sales()->fetch_template_part( [ 'template' => 'combos/archive-shortcode', 'locals' => [ 'the_query' => $the_query ] ] );
   }
 
   public function set_combos_per_page( $query ){
