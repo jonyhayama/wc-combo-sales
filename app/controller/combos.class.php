@@ -14,7 +14,7 @@ class combos{
     add_action( 'template_include', [$this, 'template_include'] );
     add_action( 'woocommerce_cart_calculate_fees', [$this, 'add_cart_discount'] );
     add_action( 'woocommerce_cart_collaterals', [$this, 'add_combo_offers_to_cart'], 0 );
-    add_action( 'pre_get_posts', [$this, 'set_combos_per_page'], 999 );
+    // add_action( 'pre_get_posts', [$this, 'set_combos_per_page'], 999 );
     add_shortcode( 'wc_combo_sales_archive', [$this, 'archive_shortcode'] );
   }
 

@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Combo Sales
 Plugin URI: 
 Description: WooCommerce Combo Sales
-Version: 0.0.8
+Version: 0.0.9
 Author: Jony Hayama
 Author URI: https://jony.dev
 */
