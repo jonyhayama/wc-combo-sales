@@ -37,7 +37,7 @@ class combos{
         'compare' => 'LIKE'
       ];
     }
-    $combos = get_posts( [
+    $combos = (!empty($cart->applied_coupons)) ? [] : get_posts( [
       'post_type' => 'combo',
       'meta_query' => $meta_query
     ] );
